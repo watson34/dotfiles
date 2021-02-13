@@ -1,112 +1,178 @@
-" setting
+scriptencoding utf-8
 set encoding=utf-8
-"文字コードをUFT-8に設定
 set fenc=utf-8
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 call plug#begin('~/.vim/plugged')
+Plug 'cocopon/iceberg.vim'
+Plug 'prabirshrestha/vim-lsp'
+Plug 'mattn/vim-lsp-settings'
+Plug '~/.fzf'
+Plug 'junegunn/fzf.vim'
 call plug#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin Settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" fzf.vim
+let g:fzf_preview_window = ['right:50%', 'ctrl-/']
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" General
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" No Title.
+set notitle
 
+" Use ruler.
+set ruler
+
+" Unsaved buffers are allowed to be in background.
+set hidden
+
+" How many histories to be remenberd.
+set history=1000
+set undolevels=1000
+
+" Try to figure out filetypes.
+filetype indent on
+
+" Enable syntax highlight.
+syntax enable
+
+" Status Line.
+set showcmd
+set laststatus=2
+
+" Colorscheme.
+set t_Co=256
+colorscheme iceberg
+set background=dark
+
+" Disable backup. " TODO Backup is important.
+set nobackup
+" Disable undofile. " TODO ignore undofile option ?
+set noundofile
+" Disable swapfile.
+set noswapfile
+
+" Don't redraw while executing macro.
+set lazyredraw
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Set wildmenu.
 set wildmenu
 set wildmode=list:longest
 set wildchar=<TAB>
 
-" バックアップファイルを作らない
-set nobackup
-set noundofile
-set noswapfile
-" 編集中のファイルが変更されたら自動で読み直す
-set autoread
-" バッファが編集中でもその他のファイルを開けるように
-set hidden
-" 入力中のコマンドをステータスに表示する
-set showcmd
-" ビープ音
-set visualbell t_vb=
-
-
-" 見た目系
-colorscheme desert
-" 行番号を表示
-set number
-set notitle
-set showcmd
-set ruler
-set showmatch
-set matchtime=1
-set laststatus=2
+" Turn line wrapping off.
 set nowrap
-" カーソル位置表示
-"set ruler
-" インデントはスマートインデント
-set smartindent
-set autoindent
-" ビープ音を可視化
-" set visualbell
-" 括弧入力時の対応する括弧を表示
-"set showmatch
-" 対応括弧ハイライト時間 *0.1sec
-set matchtime=1
-" ステータスラインを常に表示
-set laststatus=2
-" コマンドラインの補完
-set wildmode=list:longest
-" 折り返し時に表示行単位での移動できるようにする
-nnoremap j gj
-nnoremap k gk
-" ノーマルモードだけ ; と : を入れ替える
-nnoremap ; :
-nnoremap : ;
-scriptencoding utf-8 "これ入れないと下記が反映されない
-augroup highlightZenkakuSpace "全角スペースを赤色にする
-  autocmd!
-  autocmd VimEnter,ColorScheme * highlight ZenkakuSpace term=underline ctermbg=Red guibg=Red
-  autocmd VimEnter,WinEnter * match ZenkakuSpace /　/
-augroup END
 
-" Tab系
-" 不可視文字を可視化
+" Minimal number of screen lines to keep above and below the cursor.
+set scrolloff=3
+
+" Add relative line number.
+set number
+set relativenumber
+
+" Configure <BS>, <CTRL-W>, <DEL>, <CTRL-U> act.
+set backspace=eol,start,indent
+
+" Show matching brakets.
+set showmatch
+set matchtime=2
+
+" Default vsprit behaviour to right.
+set splitright
+" Default vsprit behaviour to below.
+set splitbelow
+
+" No sound bell.
+set belloff=all
+
+" Folding method.
+set foldmethod=indent
+set foldlevel=100
+
+" Show whitespaces, tabs and extentions.
 set list
 set listchars=tab:>-,trail:-,nbsp:%,extends:>,precedes:<
-" Tab文字を半角スペースにする
-set expandtab
-" 行頭以外のTab文字の表示幅（スペースいくつ分）
-set tabstop=2
-" 行頭でのTab文字の表示幅
-set shiftwidth=2
-set softtabstop=2
 
-" 検索系
-" 検索文字列が小文字の場合は大文字小文字を区別なく検索する
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Search Settings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set ignorecase
-" 検索文字列に大文字が含まれている場合は区別して検索する
 set smartcase
-" 検索文字列入力時に順次対象文字列にヒットさせる
-set incsearch
-" 検索語をハイライト表示
 set hlsearch
-" ESC連打でハイライト解除
-nmap <Esc><Esc> :nohlsearch<CR><Esc>
+set incsearch
+" Searches don't wrap around the end of the file.
+set nowrapscan
 
-filetype plugin on
-filetype indent on
-autocmd Filetype python       setlocal sw=2 sts=2 ts=2 et
-autocmd Filetype javascript   setlocal sw=2 sts=2 ts=2 et
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Text, Tab and Indent Settings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Use whitespaces for indent.
+set expandtab
+" Insert indents acoording to shiftwidth.
+set smarttab
+" Set indent width.
+set shiftwidth=4
+set tabstop=4
+" Copy indent from current line when starting a new line.
+set autoindent
 
-" plugin
-" let g:indent_guides_enable_on_vim_startup = 1
-" let g:indent_guides_auto_colors = 0
-" autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=red   ctermbg=1
-" autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=green ctermbg=0
+augroup MyFileTypeIndent
+    autocmd!
+    autocmd Filetype python   setlocal sw=2 sts=2 ts=2 et
+    autocmd Filetype markdown setlocal sw=2 sts=2 ts=2 et
+    autocmd Filetype vim      setlocal sw=4 sts=4 ts=4 et
+augroup END
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Key Mappings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nnoremap j gj
+nnoremap k gk
+nnoremap gj j
+nnoremap gk k
+nnoremap ; :
+nnoremap : ;
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Leader Key Mappings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Set spacekey for learder key.
+nnoremap <space> <nop>
+let mapleader = "\<SPACE>"
+
+" Buffers.
+nnoremap <leader>b :Buffers<CR>
+
+" Window movement.
+nnoremap <leader>wh <C-W>h
+nnoremap <leader>wl <C-W>l
+nnoremap <leader>wj <C-W>j
+nnoremap <leader>wk <C-W>k
+
+" Tab new.
+nnoremap <leader>wg :tabnew<CR>
+
+" Toggle number/relativenumber.
+nnoremap <leader>U :set number!<CR>
+nnoremap <leader>R :set relativenumber!<CR>
+
+" Turn off highlight.
+nnoremap <leader>h :nohlsearch<CR>
+
+" fzf.vim
+nnoremap <Leader>r :Rg<space>
+nnoremap <Leader>gm :GFiles?<CR>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Trial Settings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
