@@ -101,3 +101,39 @@ if [ -d "${PYENV_ROOT}" ]; then
     export PATH=${PYENV_ROOT}/bin:$PATH
     eval "$(pyenv init -)"
 fi
+
+# fzf settings
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+# file only, hidden files are also target, ignore .git directory
+export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git"'
+export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
+
+# fch - checkout git local branch
+function fzf-git-checkout-local-branch() {
+  local branches branch
+  branches=$(git --no-pager branch -vv) &&
+  branch=$(echo "$branches" | fzf +m) &&
+  git checkout $(echo "$branch" | awk '{print $1}' | sed "s/.* //")
+}
+alias fch='fzf-git-checkout-local-branch'
+
+# fga - git add
+function fzf-git-add() {
+    local selected
+    selected=$(git status -s | fzf -m | awk '{print $2}')
+    if [[ -n "$selected" ]]; then
+        selected=$(tr '\n' ' ' <<< "$selected")
+        git add $selected
+    fi
+}
+alias fga='fzf-git-add'
+
+# TODO Not recursive version
+# fvi - vim
+function fzf-vim() {
+    IFS=$'\n' files=($(fzf-tmux --query="$1" --multi --select-1 --exit-0))
+    [[ -n "$files" ]] && ${EDITOR:-vim} "${files[@]}"
+}
+alias fvim='fzf-vim'
+alias fvi='fvim'
