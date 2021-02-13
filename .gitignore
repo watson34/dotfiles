@@ -1,0 +1,5 @@
+.vim/
+.conda/
+.pyenv/
+.bash_history
+.viminfo
