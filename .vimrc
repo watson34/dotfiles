@@ -5,6 +5,7 @@ augroup MyAutoCmd
     autocmd!
 augroup END
 
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -16,6 +17,7 @@ Plug '~/.fzf'
 Plug 'junegunn/fzf.vim'
 call plug#end()
 
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin Settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -24,6 +26,7 @@ call plug#end()
 
 " fzf.vim
 let g:fzf_preview_window = ['right:50%', 'ctrl-/']
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " General
@@ -58,7 +61,7 @@ set background=dark
 
 " Disable backup. " TODO Backup is important.
 set nobackup
-" Disable undofile. " TODO ignore undofile option ?
+" Disable undofile.
 set noundofile
 " Disable swapfile.
 set noswapfile
@@ -66,9 +69,12 @@ set noswapfile
 " Don't redraw while executing macro.
 set lazyredraw
 
+" Octal numbers aren't incremented and decrimented.
+set nrformats=bin,hex
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"
+" Visual Settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Set wildmenu.
 set wildmenu
@@ -108,6 +114,7 @@ set foldlevel=100
 set list
 set listchars=tab:>-,trail:-,nbsp:%,extends:>,precedes:<
 
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Search Settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -117,6 +124,7 @@ set hlsearch
 set incsearch
 " Searches don't wrap around the end of the file.
 set nowrapscan
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Text, Tab and Indent Settings
@@ -137,6 +145,7 @@ augroup MyAutoCmd
     autocmd Filetype vim      setlocal sw=4 sts=4 ts=4 et
 augroup END
 
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Key Mappings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -145,19 +154,23 @@ nnoremap k gk
 nnoremap gj j
 nnoremap gk k
 
-" US Keyboard.
 nnoremap ; :
 nnoremap : ;
 
+" Jump back after search.
+nnoremap * *N
+nnoremap g* g*N
+
 " Toggle number/relativenumber.
-nnoremap <F1> :set number!<CR>
-nnoremap <F2> :set relativenumber!<CR>
+nnoremap <silent> <F1> :set number!<CR>
+nnoremap <silent> <F2> :set relativenumber!<CR>
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Leader Key Mappings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Set spacekey for learder key.
-nnoremap <space> <nop>
+nnoremap <Space> <nop>
 let mapleader = "\<SPACE>"
 
 " Buffers.
@@ -173,11 +186,15 @@ nnoremap <leader>wk <C-W>k
 nnoremap <leader>wg :tabnew<CR>
 
 " Turn off highlight.
-nnoremap <leader>h :nohlsearch<CR>
+nnoremap <silent> <leader>h :nohlsearch<CR>
+
+" Toggle wrap.
+nnoremap <silent> <leader>ww :set wrap!<CR>
 
 " fzf.vim
 nnoremap <Leader>r :Rg<Space>
 nnoremap <Leader>gm :GFiles?<CR>
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Syntax Settings
@@ -188,7 +205,28 @@ augroup MyAutoCmd
     autocmd VimEnter,Filetype python highlight link pythonReserved Function
 augroup END
 
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Trial Settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Improves smoothness of redrawing ?
+set ttyfast
+
+" Replace word under the cursor (repeatedly).
+nnoremap <leader>s :%s/<C-R><C-W>//gc<Left><Left><Left>
+vnoremap <leader>S :s///gc<Left><Left><Left><Left>
+
+" To easily keep home position while in command line mode.
+cnoremap <C-P> <Up>
+cnoremap <C-N> <Down>
+cnoremap <C-B> <Left>
+cnoremap <C-F> <Right>
+cnoremap <C-A> <Home>
+cnoremap <C-E> <End>
+cnoremap <C-D> <Del>
+
+" Move multiple lines at once.
+" TODO mark yank paste is much more vim like ?
+vnoremap <C-K> "zx<Up>"zP`[V`]
+vnoremap <C-J> "zx"zp`[V`]
 
