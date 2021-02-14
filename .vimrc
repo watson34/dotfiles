@@ -42,6 +42,7 @@ let g:lsp_diagnostics_highlights_enabled = 1
 " Disable auto editing.
 let g:lsp_text_edit_enabled = 0
 let g:lsp_insert_text_enabled = 0
+" TODO linter settings.
 
 " asyncomplete
 " Delay popup. " TODO Manual complete is better.
