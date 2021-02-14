@@ -10,22 +10,46 @@ augroup END
 " Plugins
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 call plug#begin('~/.vim/plugged')
+" Colorscheme
 Plug 'cocopon/iceberg.vim'
+
+" Language Server Protocol
 Plug 'prabirshrestha/vim-lsp'
 Plug 'mattn/vim-lsp-settings'
+
+" Async Autocompletion
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
+
+" git
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+
+" fzf
 Plug '~/.fzf'
 Plug 'junegunn/fzf.vim'
+
 call plug#end()
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin Settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" vim-slp
-"let g:lsp_diagnostics_enabled = 0
+" vim-lsp
+" Diagnostics settings. " TODO Toggle diagnostics is better.
+let g:lsp_diagnostics_enabled = 1
+let g:lsp_diagnostics_highlights_enabled = 1
+" Disable auto editing.
+let g:lsp_text_edit_enabled = 0
+let g:lsp_insert_text_enabled = 0
+
+" asyncomplete
+" Delay popup. " TODO Manual complete is better.
+let g:asyncomplete_popup_delay = 150
 
 " fzf.vim
-let g:fzf_preview_window = ['right:50%', 'ctrl-/']
+" Size of preview window and toggle command.
+let g:fzf_preview_window = ['up:60%:hidden', 'ctrl-d']
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -149,26 +173,6 @@ augroup END
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Key Mappings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nnoremap j gj
-nnoremap k gk
-nnoremap gj j
-nnoremap gk k
-
-nnoremap ; :
-nnoremap : ;
-
-" Jump back after search.
-nnoremap * *N
-nnoremap g* g*N
-
-" Toggle number/relativenumber.
-nnoremap <silent> <F1> :set number!<CR>
-nnoremap <silent> <F2> :set relativenumber!<CR>
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Leader Key Mappings
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Set spacekey for learder key.
 nnoremap <Space> <nop>
 let mapleader = "\<SPACE>"
@@ -191,8 +195,60 @@ nnoremap <silent> <leader>h :nohlsearch<CR>
 " Toggle wrap.
 nnoremap <silent> <leader>ww :set wrap!<CR>
 
+" Jump back after search.
+nnoremap * *N
+nnoremap g* g*N
+
+" Fail safe for mistype. " TODO Use better moving command!
+nnoremap <C-K> <C-U>
+nnoremap <C-J> <C-D>
+
+" Move as it looks.
+nnoremap j gj
+nnoremap k gk
+" Move linewise.
+nnoremap gj j
+nnoremap gk k
+
+nnoremap ; :
+nnoremap : ;
+
+" Toggle number/relativenumber.
+nnoremap <silent> <F1> :set number!<CR>
+nnoremap <silent> <F2> :set relativenumber!<CR>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Plugin Key Mappings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" vim-lsp
+" Jump to definition.
+nnoremap <silent> <C-]> :LspDefinition<CR>
+" Get list of references.
+nnoremap <Leader>ref :LspReferences<CR>
+" Execute formatter.
+nnoremap <Leader>format :LspDocumentFormat<CR>
+" Get list of diagnostics.
+nnoremap <Leader>e :LspDocumentDiagnostics<CR>
+
+" asyncomplete
+inoremap <expr> <Tab> pumvisible() ? "\<C-p>" : "\<Tab>"
+
+" vim-fugitive
+" git diff.
+nnoremap <Leader>gd :Gdiffsplit<CR>
+" git add.
+nnoremap <Leader>ga :Gwrite<CR>
+" git commit.
+"nnoremap <Leader>gc :Git commit<CR>
+
 " fzf.vim
-nnoremap <Leader>r :Rg<Space>
+" Get files at current directory.
+nnoremap <Leader>o :Files<CR>
+" Get marks.
+nnoremap <Leader>m :Marks<CR>
+" Use ripgrep.
+nnoremap <Leader>rg :Rg<Space>
+" git ls-files --modified
 nnoremap <Leader>gm :GFiles?<CR>
 
 
@@ -226,7 +282,7 @@ cnoremap <C-E> <End>
 cnoremap <C-D> <Del>
 
 " Move multiple lines at once.
-" TODO mark yank paste is much more vim like ?
+" TODO Mark yank paste is much more vim like ?
 vnoremap <C-K> "zx<Up>"zP`[V`]
 vnoremap <C-J> "zx"zp`[V`]
 
