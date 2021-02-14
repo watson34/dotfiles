@@ -1,6 +1,9 @@
-scriptencoding utf-8
 set encoding=utf-8
-set fenc=utf-8
+scriptencoding utf-8
+
+augroup MyAutoCmd
+    autocmd!
+augroup END
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins
@@ -16,6 +19,9 @@ call plug#end()
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin Settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" vim-slp
+"let g:lsp_diagnostics_enabled = 0
+
 " fzf.vim
 let g:fzf_preview_window = ['right:50%', 'ctrl-/']
 
@@ -125,8 +131,7 @@ set tabstop=4
 " Copy indent from current line when starting a new line.
 set autoindent
 
-augroup MyFileTypeIndent
-    autocmd!
+augroup MyAutoCmd
     autocmd Filetype python   setlocal sw=2 sts=2 ts=2 et
     autocmd Filetype markdown setlocal sw=2 sts=2 ts=2 et
     autocmd Filetype vim      setlocal sw=4 sts=4 ts=4 et
@@ -139,8 +144,14 @@ nnoremap j gj
 nnoremap k gk
 nnoremap gj j
 nnoremap gk k
+
+" US Keyboard.
 nnoremap ; :
 nnoremap : ;
+
+" Toggle number/relativenumber.
+nnoremap <F1> :set number!<CR>
+nnoremap <F2> :set relativenumber!<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Leader Key Mappings
@@ -161,16 +172,21 @@ nnoremap <leader>wk <C-W>k
 " Tab new.
 nnoremap <leader>wg :tabnew<CR>
 
-" Toggle number/relativenumber.
-nnoremap <leader>U :set number!<CR>
-nnoremap <leader>R :set relativenumber!<CR>
-
 " Turn off highlight.
 nnoremap <leader>h :nohlsearch<CR>
 
 " fzf.vim
-nnoremap <Leader>r :Rg<space>
+nnoremap <Leader>r :Rg<Space>
 nnoremap <Leader>gm :GFiles?<CR>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Syntax Settings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+augroup MyAutoCmd
+    " 'cls' and 'self' are practically reserved words in python.
+    autocmd VimEnter,Filetype python syntax keyword pythonReserved cls self
+    autocmd VimEnter,Filetype python highlight link pythonReserved Function
+augroup END
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Trial Settings
