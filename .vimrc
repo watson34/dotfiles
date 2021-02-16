@@ -178,9 +178,6 @@ augroup END
 nnoremap <Space> <nop>
 let mapleader = "\<SPACE>"
 
-" Buffers.
-nnoremap <leader>b :Buffers<CR>
-
 " Window movement.
 nnoremap <leader>wh <C-W>h
 nnoremap <leader>wl <C-W>l
@@ -201,8 +198,9 @@ nnoremap * *N
 nnoremap g* g*N
 
 " Fail safe for mistype. " TODO Use better moving command!
-nnoremap <C-K> <C-U>
-nnoremap <C-J> <C-D>
+" TODO Ctrl-J should not be remap?
+nnoremap <C-K> 7<C-U>
+nnoremap <C-J> 7<C-D>
 
 " Move as it looks.
 nnoremap j gj
@@ -243,6 +241,8 @@ nnoremap <Leader>ga :Gwrite<CR>
 "nnoremap <Leader>gc :Git commit<CR>
 
 " fzf.vim
+" Buffers.
+nnoremap <leader>b :Buffers<CR>
 " Get files at current directory.
 nnoremap <Leader>o :Files<CR>
 " Get marks.
@@ -285,5 +285,6 @@ cnoremap <C-D> <Del>
 " Move multiple lines at once.
 " TODO Mark yank paste is much more vim like ?
 vnoremap <C-K> "zx<Up>"zP`[V`]
+" TODO Ctrl-J should not be remap?
 vnoremap <C-J> "zx"zp`[V`]
 
