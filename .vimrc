@@ -48,6 +48,7 @@ let g:lsp_text_edit_enabled = 0
 let g:lsp_insert_text_enabled = 0
 " TODO linter settings.
 
+" snippet
 let g:UltiSnipsExpandTrigger="<C-J>"
 let g:UltiSnipsJumpForwardTrigger="<C-L>"
 let g:UltiSnipsJumpBackwardTrigger="<C-K>"
