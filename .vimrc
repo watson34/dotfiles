@@ -17,6 +17,10 @@ Plug 'cocopon/iceberg.vim'
 Plug 'prabirshrestha/vim-lsp'
 Plug 'mattn/vim-lsp-settings'
 
+" Snipet
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+
 " Async Autocompletion
 Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
@@ -44,9 +48,13 @@ let g:lsp_text_edit_enabled = 0
 let g:lsp_insert_text_enabled = 0
 " TODO linter settings.
 
+let g:UltiSnipsExpandTrigger="<C-J>"
+let g:UltiSnipsJumpForwardTrigger="<C-L>"
+let g:UltiSnipsJumpBackwardTrigger="<C-K>"
+
 " asyncomplete
 " Delay popup. " TODO Manual complete is better.
-let g:asyncomplete_popup_delay = 150
+let g:asyncomplete_popup_delay = 20
 
 " fzf.vim
 " Size of preview window and toggle command.
