@@ -187,19 +187,19 @@ nnoremap <Space> <nop>
 let mapleader = "\<SPACE>"
 
 " Window movement.
-nnoremap <leader>wh <C-W>h
-nnoremap <leader>wl <C-W>l
-nnoremap <leader>wj <C-W>j
-nnoremap <leader>wk <C-W>k
+nnoremap <Leader>wh <C-W>h
+nnoremap <Leader>wl <C-W>l
+nnoremap <Leader>wj <C-W>j
+nnoremap <Leader>wk <C-W>k
 
 " Tab new.
-nnoremap <leader>wg :tabnew<CR>
+nnoremap <Leader>wg :tabnew<CR>
 
 " Turn off highlight.
-nnoremap <silent> <leader>h :nohlsearch<CR>
+nnoremap <silent> <Leader>h :nohlsearch<CR>
 
 " Toggle wrap.
-nnoremap <silent> <leader>ww :set wrap!<CR>
+nnoremap <silent> <Leader>ww :set wrap!<CR>
 
 " Jump back after search.
 nnoremap * *N
@@ -250,7 +250,7 @@ nnoremap <Leader>ga :Gwrite<CR>
 
 " fzf.vim
 " Buffers.
-nnoremap <leader>b :Buffers<CR>
+nnoremap <Leader>b :Buffers<CR>
 " Get files at current directory.
 nnoremap <Leader>o :Files<CR>
 " Get marks.
@@ -278,8 +278,8 @@ augroup END
 set ttyfast
 
 " Replace word under the cursor (repeatedly).
-nnoremap <leader>s :%s/<C-R><C-W>//gc<Left><Left><Left>
-vnoremap <leader>S :s///gc<Left><Left><Left><Left>
+nnoremap <Leader>s :%s/<C-R><C-W>//gc<Left><Left><Left>
+vnoremap <Leader>s :s///gc<Left><Left><Left><Left>
 
 " To easily keep home position while in command line mode.
 cnoremap <C-P> <Up>
