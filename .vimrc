@@ -63,7 +63,7 @@ let g:asyncomplete_popup_delay = 20
 
 " fzf.vim
 " Size of preview window and toggle command.
-let g:fzf_preview_window = ['up:60%:hidden', 'ctrl-d']
+let g:fzf_preview_window = ['up:60%', 'ctrl-d']
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
