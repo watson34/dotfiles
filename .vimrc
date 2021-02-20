@@ -49,9 +49,13 @@ let g:lsp_insert_text_enabled = 0
 " TODO linter settings.
 
 " snippet
-let g:UltiSnipsExpandTrigger="<C-J>"
-let g:UltiSnipsJumpForwardTrigger="<C-L>"
-let g:UltiSnipsJumpBackwardTrigger="<C-K>"
+let g:UltiSnipsExpandTrigger = "<C-J>"
+let g:UltiSnipsJumpForwardTrigger = "<C-L>"
+let g:UltiSnipsJumpBackwardTrigger = "<C-K>"
+" python
+let g:ultisnips_python_style = 'google'
+let g:ultisnips_python_quoting_style = 'single'
+let g:ultisnips_python_triple_quoting_style = 'single'
 
 " asyncomplete
 " Delay popup. " TODO Manual complete is better.
@@ -65,6 +69,9 @@ let g:fzf_preview_window = ['up:60%:hidden', 'ctrl-d']
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Mouse
+set mouse=nvi
+
 " No Title.
 set notitle
 
