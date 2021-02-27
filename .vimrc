@@ -298,9 +298,3 @@ cnoremap <C-A> <Home>
 cnoremap <C-E> <End>
 cnoremap <C-D> <Del>
 
-" Move multiple lines at once.
-" TODO Mark yank paste is much more vim like ?
-vnoremap <C-K> "zx<Up>"zP`[V`]
-" TODO Ctrl-J should not be remap?
-vnoremap <C-J> "zx"zp`[V`]
-
