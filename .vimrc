@@ -298,3 +298,9 @@ cnoremap <C-A> <Home>
 cnoremap <C-E> <End>
 cnoremap <C-D> <Del>
 
+" Fold.
+nnoremap <Leader>ff :set foldlevel=1<CR>
+nnoremap <Leader>fk zm
+nnoremap <Leader>fj zr
+nnoremap <Leader>fz zR
+
