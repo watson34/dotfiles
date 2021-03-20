@@ -30,7 +30,15 @@ if ! shopt -oq posix; then
 fi
 
 # Prompt
-PS1='[\[\033[1;32m\]\u\[\033[00m\]:\[\033[1;34m\]\w\[\033[1;31m\]$(__git_ps1)\[\033[00m\] \t]\n\$ '
+function prompt_func () {
+    local ret=$?
+    if [ $ret -eq 0 ]; then
+        PS1="[\[\033[1;32m\]\u\[\033[00m\]:\[\033[1;34m\]\w\[\033[1;31m\]$(__git_ps1)\[\033[00m\] \t]\n\[\033[1;32m\]\$\[\033[0m\]"
+    else
+        PS1="[\[\033[1;32m\]\u\[\033[00m\]:\[\033[1;34m\]\w\[\033[1;31m\]$(__git_ps1)\[\033[00m\] \t](${ret})\n\[\033[1;31m\]\$\[\033[0m\]"
+    fi
+}
+PROMPT_COMMAND="prompt_func"
 
 # git command prompt settings.
 GIT_PS1_SHOWDIRTYSTATE=1
