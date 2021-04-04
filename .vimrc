@@ -204,7 +204,7 @@ nnoremap <Leader>wk <C-W>k
 nnoremap <Leader>wg :tabnew<CR>
 
 " Turn off highlight.
-nnoremap <silent> <Leader>h :nohlsearch<CR>
+nnoremap <silent> <Leader>h :set hlsearch!<CR>
 
 " Toggle wrap.
 nnoremap <silent> <Leader>ww :set wrap!<CR>
