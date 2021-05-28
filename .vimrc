@@ -70,7 +70,7 @@ let g:fzf_preview_window = ['up:60%', 'ctrl-d']
 " General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Mouse
-set mouse=nvi
+"set mouse
 
 " No Title.
 set notitle
@@ -130,7 +130,7 @@ set scrolloff=3
 
 " Add relative line number.
 set number
-set relativenumber
+set norelativenumber
 
 " Configure <BS>, <CTRL-W>, <DEL>, <CTRL-U> act.
 set backspace=eol,start,indent
@@ -204,7 +204,7 @@ nnoremap <Leader>wk <C-W>k
 nnoremap <Leader>wg :tabnew<CR>
 
 " Turn off highlight.
-nnoremap <silent> <Leader>h :set hlsearch!<CR>
+nnoremap <silent> <Leader>h :noh<CR>
 
 " Toggle wrap.
 nnoremap <silent> <Leader>ww :set wrap!<CR>
