@@ -33,6 +33,9 @@ Plug 'airblade/vim-gitgutter'
 Plug '~/.fzf'
 Plug 'junegunn/fzf.vim'
 
+"toml"
+Plug 'cespare/vim-toml'
+
 call plug#end()
 
 
@@ -289,16 +292,6 @@ set ttyfast
 nnoremap <Leader>s :%s/<C-R><C-W>//gc<Left><Left><Left>
 vnoremap <Leader>s :s///gc<Left><Left><Left><Left>
 
-" To easily keep home position while in command line mode.
-cnoremap <C-P> <Up>
-cnoremap <C-N> <Down>
-cnoremap <C-B> <Left>
-cnoremap <C-F> <Right>
-cnoremap <C-A> <Home>
-cnoremap <C-E> <End>
-cnoremap <C-D> <Del>
-
-" Fold.
 nnoremap <Leader>ff :set foldlevel=1<CR>
 nnoremap <Leader>fk zm
 nnoremap <Leader>fj zr
