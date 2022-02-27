@@ -30,11 +30,15 @@ Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 
 " fzf
-Plug '~/.fzf'
+"Plug '~/.fzf'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
-"toml"
+"toml
 Plug 'cespare/vim-toml'
+
+" translate
+Plug 'skanehira/translate.vim'
 
 call plug#end()
 
@@ -46,10 +50,26 @@ call plug#end()
 " Diagnostics settings. " TODO Toggle diagnostics is better.
 let g:lsp_diagnostics_enabled = 1
 let g:lsp_diagnostics_highlights_enabled = 1
+let g:lsp_diagnostics_echo_cursor = 1
 " Disable auto editing.
 let g:lsp_text_edit_enabled = 0
 let g:lsp_insert_text_enabled = 0
 " TODO linter settings.
+let g:lsp_settings = {
+\  'pylsp-all': {
+\    'workspace_config': {
+\      'pylsp': {
+\        'configurationSources': ['flake8'],
+\        'plugins': {
+\          'flake8': {'enabled': 1},
+\          'mccade': {'enabled': 0},
+\          'pycodestyle': {'enabled': 0},
+\          'pyflakes': {'enabled': 0}
+\        }
+\      }
+\    }
+\  }
+\}
 
 " snippet
 let g:UltiSnipsExpandTrigger = "<C-J>"
@@ -297,3 +317,8 @@ nnoremap <Leader>fk zm
 nnoremap <Leader>fj zr
 nnoremap <Leader>fz zR
 
+" blowser with w3m
+function! s:www(word) abort
+    execute('vert term ++close ++shell w3m google.com/search\?q="' . a:word . '"')
+endfunction
+command! -nargs=1 WWW call s:www(<f-args>)
