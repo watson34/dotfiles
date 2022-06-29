@@ -258,6 +258,17 @@ nnoremap <silent> <F2> :set relativenumber!<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin Key Mappings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" iceberg
+if exists("ToggleBackground") == 0
+    function ToggleBackground()
+        if &background == "dark"
+            set background=light
+        else
+            set background=dark
+        endif
+    endfunction
+endif
+nnoremap <Leader>c :call ToggleBackground()<CR>
 " vim-lsp
 " Jump to definition.
 nnoremap <silent> <C-]> :LspDefinition<CR>
